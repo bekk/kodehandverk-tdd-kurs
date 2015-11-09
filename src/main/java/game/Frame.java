@@ -1,3 +1,5 @@
+package game;
+
 public class Frame
 {
     private final int MAX_ROLLS = 2;

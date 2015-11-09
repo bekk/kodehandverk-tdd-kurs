@@ -1,3 +1,6 @@
+package game;
+
+import game.LastFrame;
 import org.junit.Before;
 import org.junit.Test;
 
