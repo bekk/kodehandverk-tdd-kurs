@@ -1,11 +1,11 @@
-public class BowlingGame {
+public class BowlingScorer {
     private static final int NUM_FRAMES = 10;
     private static final int LAST_FRAME = NUM_FRAMES - 1;
 
     private final Frame[] frames = new Frame[NUM_FRAMES];
     private int currentFrame;
 
-    public BowlingGame()
+    public BowlingScorer()
     {
         initFrames();
     }
