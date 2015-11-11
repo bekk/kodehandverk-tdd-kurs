@@ -1,4 +1,5 @@
-package game;
+package scorer;
+
 
 public class BowlingScorer {
     private static final int NUM_FRAMES = 10;

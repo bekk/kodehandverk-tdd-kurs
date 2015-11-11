@@ -1,6 +1,11 @@
-package game;
+package scorer;
 
-public class Frame
+// PRO-TIP:
+// Legg merke til at vi ikke har public, protected eller private forran klassedeklarasjonen.
+// Det betyr at den er kun synlig inne i pakken "game". Det er fint fordi vi vil ikke at
+// noen andre skal kjenne til et "internt" konsept som "Frame". Det er noe kun scorern trenger
+
+class Frame
 {
     private final int MAX_ROLLS = 2;
     private static final int BONUS_WORTHY_SCORE = 10;

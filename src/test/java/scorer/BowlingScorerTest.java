@@ -1,6 +1,6 @@
-package game;
+package scorer;
 
-import game.BowlingScorer;
+import scorer.BowlingScorer;
 import org.junit.*;
 
 import static org.junit.Assert.assertEquals;

@@ -1,6 +1,6 @@
-package game;
+package scorer;
 
-public class LastFrame extends Frame {
+class LastFrame extends Frame {
 
     private final int MAX_ROLLS = 3;
 

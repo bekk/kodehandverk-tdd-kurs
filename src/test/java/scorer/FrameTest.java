@@ -1,6 +1,6 @@
-package game;
+package scorer;
 
-import game.Frame;
+import scorer.Frame;
 import org.junit.Before;
 import org.junit.Test;
 

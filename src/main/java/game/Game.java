@@ -10,4 +10,13 @@ public class Game {
     private Lightning lightning;
     private Payment payment;
     private HighScoreRepository highScoreRepository;
+
+    public Game(Display display, Lightning lightning, Payment payment, HighScoreRepository highScoreRepository) {
+        this.display = display;
+        this.lightning = lightning;
+        this.payment = payment;
+        this.highScoreRepository = highScoreRepository;
+    }
+
+
 }
