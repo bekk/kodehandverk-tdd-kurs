@@ -11,6 +11,7 @@ Rekkefølgen vi legger inn spillerne på er den rekkefølgen de spiller i.
 
 **Tips:**
 Forslag til datastrukturer i denne oppgaven er en `Map<Player, BowlingScorer>` for å holde rede på en spillers poeng. (Her gjenbruker vi koden fra forrige del av kurset.) I tillegg må du holde rede på rekkefølgen på spillere. Dette kan gjøres med en egen liste av typen `ArrayList<Player>`. Du kan endre på dette senere. Ved skjule implementasjonsdetaljer står vi friere i ettertid til å endre koden uten å måtte fikse tester og skrive om andre ting.
+Et annet bra tips er å lage en metode for å starte et spill med spillere i testklassen.
 
 **Forslag til tester:**
 
@@ -21,9 +22,10 @@ Forslag til datastrukturer i denne oppgaven er en `Map<Player, BowlingScorer>` f
 * Forsøk på å legge inn `null` på en spiller skal også gi en exception
   * `IllegalArgumentException` kan passe
 
+
 # Oppgave 2: Starte spillet
 
-**Tid:** 10 min
+**Tid:** 15 min
 
 **Mål:** Lære å bruke mocks/spies for å sjekke hva som har skjedd.
 
@@ -31,7 +33,8 @@ Forslag til datastrukturer i denne oppgaven er en `Map<Player, BowlingScorer>` f
 Når spillet startes vil vi at det skal vises en fancy velkomstanimasjon på banen. Tror gutta i Latvia holder på med animasjonen, men dere kan bare gå i gang med å sette det opp slik at det er klart når vi får den.
 
 **Tips:**
-Du kan lage en klasse som implementerer samme interface.
+Du kan lage en klasse som implementerer interfacet `Display`.
+Husk at spillet må ha spillere for å kunne startes.
 
 **Forslag til tester**:
 
@@ -39,22 +42,12 @@ Du kan lage en klasse som implementerer samme interface.
   * `Display#showWelcomeScreen()` er metoden som skal kalles
   * Du kan stole på at gutta i Latvia gjør jobben sin, så du trenger bare å sørge for at koden blir kalt.
 
-_TIPS: Her er det mulighet for å lage en hjelpemetode._
-
 **Løsningsforslag:**
 
-* Lag et interface kalt `Clock` med en metode kalt `now()` som returnerer `LocalDateTime`
-* Lag en implementasjon som heter `SystemClock` der `now()`  returnerer `LocalDateTime.now()`
-* Legg til interfacet i `Game`-klassen og ta det inn i konstruktøren eller lag et setter
-  Bruk `SystemClock` som standardimplementasjon
-* Lag en test-implementasjon som heter `AdjustableClock` med en ekstra metode for å sette tiden `setFixedTime(LocalDateTime time)` og evt. `reset()` for å nullstille den.
-`now()` returnerer da `fixedTime` on den er satt (!= null) og `new SystemClock().now()` om den ikke er satt.
-  * Legg merke til at du må bruke `AdjustableClock` og ikke `Clock`-interfacet i testene slik at du kan bruke de nye metodene.
-* I `Game`-klassen kan du da hente ut tiden med `clock.now()` framfor å bruke `LocalDateTime.now()`. Gratulerer, du har nå funnet en måte å kontrollere tiden på.
-* Det finnes en annen måte å løse dette på ved å lage et interface som har en metode som heter noe sånt som `isDiscoTime()` og returnerer true/false. Da forsvinner konseptet med tid helt, men det er ikke alltid det passer eller er naturlig.
-
-
-
+* Lag en mock som implementerer `Display`-interfacet - kall det gjerne `MockDisplay`. I metoden `showWelcomeScreen` setter du en public variabel kalt `hasShownWelcomeScreen` til `true`.
+* I testen setter du inn en instans av `MockDisplay`
+* Gjør en assert mot `MockDisplay#hasShownWelcomeScreen` og sjekk at den er true
+  * Husk å gi gode feilmeldinger om du bruker assertTrue/False
 
 
 # Oppgave X: Testing med tid
