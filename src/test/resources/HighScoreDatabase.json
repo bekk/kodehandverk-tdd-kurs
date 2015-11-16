@@ -1,0 +1,11 @@
+{
+  "scores" : [
+    {
+      "name": "Esben",
+      "score": 300
+    }, {
+      "name": "Torstein",
+      "score": 50
+    }
+  ]
+}
