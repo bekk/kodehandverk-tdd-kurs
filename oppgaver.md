@@ -50,6 +50,55 @@ Husk at spillet må ha spillere for å kunne startes.
   * Husk å gi gode feilmeldinger om du bruker assertTrue/False
 
 
+
+# Oppgave 3: Spille Bowling
+
+**Tid:** 30 min
+
+**Mål:** Orkestrere en del funksjonalitet i flere komponenter. Samt terpe på bruk av mocks.
+
+**Krav:**
+Gitt at spillet er startet så skal hvert kast registreres. Det er noen avanserte sensorer som sender signaler til systemet om hvor mange kjegler som ble truffet. Vi har følgende krav:
+
+* Alle poeng etter et kast skal registreres på den aktive spilleren
+* Strikes fører til at en teit animasjon vises
+* Etter endt runde (en spiller er ferdig med sine kast) skal neste spiller kalles opp
+
+**Tips:**
+Du kan lage en klasse som implementerer interfacet `Display`.
+Husk at spillet må ha spillere for å kunne startes.
+
+**Forslag til tester**:
+
+* Gitt at spillet startes, så skal det vises en velkomstanimasjon på skjermen
+  * `Display#showWelcomeScreen()` er metoden som skal kalles
+  * Du kan stole på at gutta i Latvia gjør jobben sin, så du trenger bare å sørge for at koden blir kalt.
+
+**Løsningsforslag:**
+
+* Lag en mock som implementerer `Display`-interfacet - kall det gjerne `MockDisplay`. I metoden `showWelcomeScreen` setter du en public variabel kalt `hasShownWelcomeScreen` til `true`.
+* I testen setter du inn en instans av `MockDisplay`
+* Gjør en assert mot `MockDisplay#hasShownWelcomeScreen` og sjekk at den er true
+  * Husk å gi gode feilmeldinger om du bruker assertTrue/False
+
+
+
+# Oppgave X: Avslutte spillet
+
+**Tid:** ? min
+
+**Mål**: Mer forretningslogikk og bruk av mocks.
+
+**Krav:**
+Spillet kan avsluttes når som helst ved at spillerne går opp til skranken og ber om å avslutte.
+Når spillet avsluttes må systemet sjekke om en eller flere spillere har fått en ny highscore. Om det er tilfelle må systemet oppdatere highscore-listen.
+
+**Tips:**
+* Det kan være lurt å lage en metode for å hente ut en spillers poengsum
+
+
+
+
 # Oppgave X: Testing med tid
 
 **Tid:** 20 min
