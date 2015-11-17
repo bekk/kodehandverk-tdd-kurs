@@ -23,6 +23,14 @@ public final class FileHighScoreRepositoryConnector {
     /**
      * Leser filen og returnerer en enkel datastruktur for å representere en highscore-tabell
      *
+     * Det den gjør er å lese opp en fil med en antatt JSON-struktur som følgende:
+     *
+     * [
+     *  {name: "Player 1", score: 300},
+     *  {name: "Player 2", score: 290},
+     *  {name: "Player 3", score: 250}
+     * ]
+     *
      * @throws IOException
      * @throws ParseException
      */
@@ -49,15 +57,6 @@ public final class FileHighScoreRepositoryConnector {
         JSONObject topLevelObject = new JSONObject();
         JSONArray scores = new JSONArray();
 
-        // Creates a object structure like this:
-        // [{
-        //    name: "Player name 1",
-        //    score: 200
-        //  },
-        //  {
-        //    name: "Player name 2",
-        //    score: 150
-        // }]
         for (Player player : highscores.keySet()) {
             JSONObject obj = new JSONObject();
             obj.put("name", player.getName());
