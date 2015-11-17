@@ -26,12 +26,19 @@ public class BowlingScorer {
         }
     }
 
-    public void roll(int pins)
+    /**
+     * @return true if the frame is finished
+     */
+    public boolean roll(int pins)
     {
         currentFrame().roll(pins);
 
-        if (currentFrame().isOver())
+        if (currentFrame().isOver()) {
             moveToNextFrame();
+            return true;
+        }
+
+        return false;
     }
 
     private int moveToNextFrame()

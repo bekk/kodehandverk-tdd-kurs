@@ -15,23 +15,9 @@ import static org.junit.Assert.assertTrue;
 public class GameTest {
     private final String DEFAULT_PLAYER_NAME = "Torstein";
 
-    /*
 
-    Her vil vi teste at et spill ikke kan starte uten at spillere er "registrert" i Enterprise bowling systemet.
-
-    @Test(expected = Exception.class)
-    public void should_throw_exception_when_no_players_present_at_gamestart(){
-
-    }
-    */
-
-    /*
-    Her vil vi teste at et spill starter opp dersom en eller flere spillere har registrert seg.
-     */
-    @Test
-    public void should_start_game_when_one_or_more_players_present_at_gamestart() {
-
-    }
+    // Tests for lightning
+    // ========================================================================
 
     @Test()
     public void should_turn_on_lights_when_game_starts() {
@@ -44,7 +30,7 @@ public class GameTest {
         game.setLightning(lightningMock);
         game.startGame();
 
-        assertTrue(lightningMock.turnedOnlights);
+        assertThat(lightningMock.turnedOnlights, is(true));
     }
 
     @Test
@@ -54,14 +40,14 @@ public class GameTest {
         LocalDateTime fridayFiveOClock = LocalDateTime.of(2015, 11, 13, 17, 00);
         AdjustableClock adjustableClock = new AdjustableClock();
         adjustableClock.setClock(fridayFiveOClock);
+
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
         game.setLightning(lightningMock);
         game.startGame();
 
-        assertTrue(lightningMock.turnedOnDiscoLights);
+        assertThat(lightningMock.turnedOnDiscoLights, is(true));
     }
-
 
     @Test
     public void should_turn_on_disco_lights_when_starting_game_on_friday_23_59() {
@@ -70,11 +56,13 @@ public class GameTest {
         LocalDateTime fridayFiveOClock = LocalDateTime.of(2015, 11, 13, 23, 59);
         AdjustableClock adjustableClock = new AdjustableClock();
         adjustableClock.setClock(fridayFiveOClock);
+
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
         game.setLightning(lightningMock);
         game.startGame();
-        assertTrue(lightningMock.turnedOnDiscoLights);
+
+        assertThat(lightningMock.turnedOnDiscoLights, is(true));
     }
 
     @Test
@@ -84,12 +72,13 @@ public class GameTest {
         LocalDateTime fridayFiveOClock = LocalDateTime.of(2015, 11, 14, 00, 00);
         AdjustableClock adjustableClock = new AdjustableClock();
         adjustableClock.setClock(fridayFiveOClock);
+
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
         game.setLightning(lightningMock);
         game.startGame();
 
-        assertTrue(lightningMock.turnedOnlights);
+        assertThat(lightningMock.turnedOnlights, is(true));
     }
 
     @Test
@@ -104,11 +93,26 @@ public class GameTest {
         game.setLightning(lightningMock);
         game.startGame();
 
-        assertTrue(lightningMock.turnedOnlights);
+        assertThat(lightningMock.turnedOnlights, is(true));
     }
 
+    @Test
+    public void should_turn_off_the_light_when_the_game_ends() throws Exception {
+        LightningMock lightningMock = new LightningMock();
+
+        Game game = createGameWithPlayers();
+        game.setLightning(lightningMock);
+        game.endGame();
+
+        assertThat(lightningMock.turnedOffLights, is(true));
+    }
+
+
+    // Test game start and player registration
+    // ========================================================================
+
     private Game createGameWithPlayers() {
-        Game game = new Game(new MockDisplay(), new LightningMock(), new MockHighScoreRepository(), new SystemClock());
+        Game game = new Game(new MockDisplay(), new LightningMock(), new MockHighScoreRepository());
         game.addPlayer(new Player(DEFAULT_PLAYER_NAME));
         return game;
     }
@@ -124,6 +128,9 @@ public class GameTest {
         Game game = new Game(null, null, null);
         game.addPlayer(null);
     }
+
+    // Test highscoring logic
+    // ========================================================================
 
     @Test
     public void should_not_update_if_not_new_highscore() throws Exception {
@@ -151,16 +158,72 @@ public class GameTest {
         assertThat(mockHighScoreRepository.updatedHighScores, is(true));
     }
 
+    // Test display
+    // ========================================================================
+
+    @Test
+    public void should_show_strike_animation_on_strike() {
+        MockDisplay mockDisplay = new MockDisplay();
+
+        Game game = createGameWithPlayers();
+        game.setDisplay(mockDisplay);
+        game.startGame();
+        game.roll(10);
+
+        assertThat(mockDisplay.showedStrikeAnimation, is(true));
+    }
+
+    @Test
+    public void should_not_show_strike_animation_on_spare() {
+        MockDisplay mockDisplay = new MockDisplay();
+
+        Game game = createGameWithPlayers();
+        game.setDisplay(mockDisplay);
+        game.startGame();
+        game.roll(9);
+        game.roll(1);
+
+        assertThat(mockDisplay.showedStrikeAnimation, is(false));
+    }
+
     @Test
     public void should_announce_next_player_on_start() {
         MockDisplay mockDisplay = new MockDisplay();
 
         Game game = createGameWithPlayers();
         game.setDisplay(mockDisplay);
-        game.setLightning(new LightningMock());
         game.startGame();
 
         assertThat(mockDisplay.showedCallPlayerToAction, is(true));
+        assertThat(mockDisplay.lastPlayerCalledToAction.getName(), is(DEFAULT_PLAYER_NAME));
+    }
+
+    @Test
+    public void should_announce_next_player_after_a_strike() {
+        MockDisplay mockDisplay = new MockDisplay();
+
+        Game game = createGameWithPlayers();
+        game.addPlayer(new Player("Player 2"));
+        game.setDisplay(mockDisplay);
+        game.startGame();
+
+        game.roll(10); // Player 1 rolls a strike and it's the next players turn
+
+        assertThat(mockDisplay.lastPlayerCalledToAction.getName(), is("Player 2"));
+    }
+
+    @Test
+    public void should_announce_first_player_when_second_player_strikes() {
+        MockDisplay mockDisplay = new MockDisplay();
+
+        Game game = createGameWithPlayers();
+        game.addPlayer(new Player("Player 2"));
+        game.setDisplay(mockDisplay);
+        game.startGame();
+
+        game.roll(10); // Player 1 rolls a strike and it's the next players turn
+        game.roll(10); // Player 2 rolls a strike and it's the first players turn
+
         assertThat(mockDisplay.lastPlayerCalledToAction.getName(), is(DEFAULT_PLAYER_NAME));
     }
 }
