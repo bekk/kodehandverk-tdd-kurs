@@ -38,7 +38,7 @@ public final class FileHighScoreRepositoryConnector {
         return highScores;
     }
 
-    public boolean storeHighscores(Map<Player, Integer> highscores) throws URISyntaxException, IOException {
+    public void storeHighscores(Map<Player, Integer> highscores) throws URISyntaxException, IOException {
         JSONObject topLevelObject = new JSONObject();
         JSONArray scores = new JSONArray();
 
@@ -53,6 +53,5 @@ public final class FileHighScoreRepositoryConnector {
 
         outputStream.write(topLevelObject.toJSONString().getBytes());
         outputStream.close();
-        return true;
     }
 }

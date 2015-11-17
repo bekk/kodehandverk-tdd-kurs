@@ -19,10 +19,11 @@ public class FileHighScoreRepositoryTest {
 
     @Test
     public void test_database_should_store_items() throws IOException, ParseException, URISyntaxException {
+        //Tester per nå at ingen exceptions blir kastet...
         FileHighScoreRepositoryConnector reader = new FileHighScoreRepositoryConnector();
         Map<Player, Integer> updatedHighscores = new HashMap<Player, Integer>();
         updatedHighscores.put(new Player("Esben"), 299);
         updatedHighscores.put(new Player("Torstein"), 22);
-        assertTrue(reader.storeHighscores(updatedHighscores));
+        reader.storeHighscores(updatedHighscores);
     }
 }
