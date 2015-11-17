@@ -11,16 +11,20 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Denne klassen har vi laget for dere.
+ * Den kan lese og skrive til en JSON-fil.
+ */
 public final class FileHighScoreRepositoryConnector {
+    // Filen finner dere i resources.
     final String FILE_NAME = "/HighScoreDatabase.json";
 
-    private final JSONArray getCurrentHighscores() throws IOException, ParseException {
-        File file = new File(getDatabaseFile());
-        JSONObject data = (JSONObject) new JSONParser().parse(new FileReader(file));
-        JSONArray scores = (JSONArray) data.get("scores");
-        return scores;
-    }
-
+    /**
+     * Leser filen og returnerer en enkel datastruktur for å representere en highscore-tabell
+     *
+     * @throws IOException
+     * @throws ParseException
+     */
     public Map<Player, Integer> readDatabase() throws IOException, ParseException {
         Map<Player, Integer> highScores = new HashMap<Player, Integer>();
 
@@ -34,6 +38,13 @@ public final class FileHighScoreRepositoryConnector {
         return highScores;
     }
 
+    /**
+     * Lagrer (overskriver) en highscore-tabell til fil.
+     * Her må du passe på å lese opp eksisterende tabell og putte inn ny score.
+     *
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public void storeHighscores(Map<Player, Integer> highscores) throws URISyntaxException, IOException {
         JSONObject topLevelObject = new JSONObject();
         JSONArray scores = new JSONArray();
@@ -61,6 +72,13 @@ public final class FileHighScoreRepositoryConnector {
         try ( OutputStream outputStream = new FileOutputStream(getDatabaseFile(), false) ) {
             outputStream.write(topLevelObject.toJSONString().getBytes());
         }
+    }
+
+    private final JSONArray getCurrentHighscores() throws IOException, ParseException {
+        File file = new File(getDatabaseFile());
+        JSONObject data = (JSONObject) new JSONParser().parse(new FileReader(file));
+        JSONArray scores = (JSONArray) data.get("scores");
+        return scores;
     }
 
     private String getDatabaseFile() {
