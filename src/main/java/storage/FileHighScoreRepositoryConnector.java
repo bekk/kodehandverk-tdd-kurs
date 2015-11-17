@@ -7,7 +7,6 @@ import org.json.simple.parser.ParseException;
 import player.Player;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
