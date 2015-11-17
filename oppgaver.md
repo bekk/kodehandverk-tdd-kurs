@@ -107,8 +107,7 @@ Husk at spillet må ha spillere for å kunne startes.
 **Krav:**
 Spillet kan avsluttes når som helst ved at spillerne går opp til skranken og ber om å avslutte.
 Når spillet avsluttes må systemet sjekke om en eller flere spillere har fått en ny highscore. Om det er tilfelle må systemet oppdatere highscore-listen.
-
-
+Sist, men ikke minst, må vi skru av lysene. En fyr som heter Emil har sagt at det er sånn det må være.
 
 **Tips:**
 
