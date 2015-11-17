@@ -176,21 +176,31 @@ public class AdjustableClock implements Clock {
 
 **Tid:** ? min
 
-**Mål**: Implementere litt mer forretningslogikk og bruk av stubs.
+**Mål**: Implementere litt mer forretningslogikk og annen bruk av mocks.
 
 **Krav:**
 Spillet kan avsluttes når som helst ved at spillerne går opp til skranken og ber om å avslutte.
 Når spillet avsluttes må systemet sjekke om en eller flere spillere har fått en ny highscore. Om det er tilfelle må systemet oppdatere highscore-listen.
 Det er viktig at det ikke er mer enn 10 navn på listen.
-Sist, men ikke minst, må vi skru av lysene. En fyr som heter Emil har sagt at det er sånn det må være.
+Sist, men ikke minst, må vi skru av lysene. En fyr som heter Emil har sagt at det er viktig. (Husk, et tørk er nok!)
 
 **Tips:**
+* Du har listen med spillere og deres score samt mulighet til å hente en tilsvarende liste med eksisterende highscores. Nå kommer endelig AlgDat-en til nytte!
+* Det er en del nyttige metoder på interfacet til `HighScoreRepository`
+* Du må nok være litt kreativ med hva du gjør i mocken for å kunne teste de forskjellige casene.
+* Kravet med maks 10 navn er kanskje ikke viktig å teste her...?
+  * Ingen fasit, men dere kan bestemme selv hvor logikken ligger
 
+**Forslag til tester**:
+* Ikke oppdater om det ikke er en ny highscore
+* Oppdater om det er en ny highscore
+* Evt. ikke plukke ut mer enn 10 navn
+* Må håndtere tom liste
+* Må håndtere ny highscore når det allerede er 10 navn på listen
 
 **Løsningsforslag:**
 * Opprett en `MockHighScorePerister`
   * Lag felt for å holde på den laveste scoren (det minste du må ha for å komme inn listen) som heter `lowestHighScore`
-
 
 
 # Oppgave 6: Integrasjonsteste en filbasert highscore tabell
