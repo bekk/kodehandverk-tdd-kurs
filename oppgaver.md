@@ -76,6 +76,8 @@ Gitt at spillet er startet så skal hvert kast registreres. Det er noen avansert
 * Alle poeng etter et kast skal registreres på den aktive spilleren
 * Strikes fører til at en teit animasjon vises
 * Etter endt runde (en spiller er ferdig med sine kast) skal neste spiller kalles opp
+  * Tips: Hold rede på rundene
+  * Tips: Du kan endre på BowlingScorer for å få hjelp til å vite om en spiller er ferdig med runden sin
 
 **Tips:**
 Du kan lage en klasse som implementerer interfacet `Display`.
