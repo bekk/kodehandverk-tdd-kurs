@@ -38,17 +38,29 @@ public final class FileHighScoreRepositoryConnector {
         JSONObject topLevelObject = new JSONObject();
         JSONArray scores = new JSONArray();
 
+        // Creates a object structure like this:
+        // [{
+        //    name: "Player name 1",
+        //    score: 200
+        //  },
+        //  {
+        //    name: "Player name 2",
+        //    score: 150
+        // }]
         for (Player player : highscores.keySet()) {
             JSONObject obj = new JSONObject();
             obj.put("name", player.getName());
             obj.put("score", highscores.get(player));
             scores.add(obj);
         }
-        topLevelObject.put("scores", scores);
-        OutputStream outputStream = new FileOutputStream(getDatabaseFile());
 
-        outputStream.write(topLevelObject.toJSONString().getBytes());
-        outputStream.close();
+        topLevelObject.put("scores", scores);
+
+        // Pro-tip: try (...) gjør at ressursen (filen i dette tilfellet uansett lukkes
+        // etter den er lest (også om noe feiler)
+        try ( OutputStream outputStream = new FileOutputStream(getDatabaseFile(), false) ) {
+            outputStream.write(topLevelObject.toJSONString().getBytes());
+        }
     }
 
     private String getDatabaseFile() {
