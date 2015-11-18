@@ -20,9 +20,9 @@ public class GameTest {
     @Test()
     public void should_turn_on_lights_when_game_starts() {
         LightningMock lightningMock = new LightningMock();
-        AdjustableClock adjustableClock = new AdjustableClock();
-        adjustableClock.setClock(new LocalDateTime(2015, 11, 16, 8, 0));// Monday morning
-
+        LocalDateTime MondayMorning = new LocalDateTime(2015, 11, 16, 8, 0);
+        AdjustableClock adjustableClock = new AdjustableClock(MondayMorning);
+        
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
         game.setLightning(lightningMock);
@@ -36,8 +36,7 @@ public class GameTest {
         LightningMock lightningMock = new LightningMock();
 
         LocalDateTime fridayFiveOClock = new LocalDateTime(2015, 11, 13, 17, 00);
-        AdjustableClock adjustableClock = new AdjustableClock();
-        adjustableClock.setClock(fridayFiveOClock);
+        AdjustableClock adjustableClock = new AdjustableClock(fridayFiveOClock);
 
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
@@ -52,8 +51,7 @@ public class GameTest {
         LightningMock lightningMock = new LightningMock();
 
         LocalDateTime fridayFiveOClock = new LocalDateTime(2015, 11, 13, 23, 59);
-        AdjustableClock adjustableClock = new AdjustableClock();
-        adjustableClock.setClock(fridayFiveOClock);
+        AdjustableClock adjustableClock = new AdjustableClock(fridayFiveOClock);
 
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
@@ -68,8 +66,7 @@ public class GameTest {
         LightningMock lightningMock = new LightningMock();
 
         LocalDateTime fridayFiveOClock = new LocalDateTime(2015, 11, 14, 00, 00);
-        AdjustableClock adjustableClock = new AdjustableClock();
-        adjustableClock.setClock(fridayFiveOClock);
+        AdjustableClock adjustableClock = new AdjustableClock(fridayFiveOClock);
 
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
@@ -84,8 +81,7 @@ public class GameTest {
         LightningMock lightningMock = new LightningMock();
 
         LocalDateTime fridayFiveOClock = new LocalDateTime(2015, 11, 13, 16, 59);
-        AdjustableClock adjustableClock = new AdjustableClock();
-        adjustableClock.setClock(fridayFiveOClock);
+        AdjustableClock adjustableClock = new AdjustableClock(fridayFiveOClock);
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
         game.setLightning(lightningMock);
