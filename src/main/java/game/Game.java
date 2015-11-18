@@ -2,12 +2,12 @@ package game;
 
 import display.Display;
 import lightning.Lightning;
+import org.joda.time.LocalDateTime;
+import org.joda.time.DateTimeConstants;
 import player.Player;
 import scorer.BowlingScorer;
 import storage.HighScoreRepository;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -17,6 +17,7 @@ import java.util.*;
  */
 public class Game {
     public static final int STRIKE = 10;
+
     // Dependencies
     private Display display;
     private Lightning lightning;
@@ -64,7 +65,7 @@ public class Game {
 
 
         LocalDateTime currentTime = this.clock.now();
-        if (currentTime.getDayOfWeek() == DayOfWeek.FRIDAY && currentTime.getHour() >= 17) {
+        if (currentTime.getDayOfWeek() == DateTimeConstants.FRIDAY && currentTime.getHourOfDay() >= 17) {
             // DISCO-MODE!!!
             this.lightning.turnOnDiscoLights();
         } else {

@@ -2,15 +2,13 @@ package game;
 
 import display.MockDisplay;
 import lightning.LightningMock;
+import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import player.Player;
 import storage.MockHighScoreRepository;
 
-import java.time.LocalDateTime;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class GameTest {
     private final String DEFAULT_PLAYER_NAME = "Torstein";
@@ -23,7 +21,7 @@ public class GameTest {
     public void should_turn_on_lights_when_game_starts() {
         LightningMock lightningMock = new LightningMock();
         AdjustableClock adjustableClock = new AdjustableClock();
-        adjustableClock.setClock(LocalDateTime.of(2015,11,16,8,0));// Monday morning
+        adjustableClock.setClock(new LocalDateTime(2015, 11, 16, 8, 0));// Monday morning
 
         Game game = createGameWithPlayers();
         game.setClock(adjustableClock);
@@ -37,7 +35,7 @@ public class GameTest {
     public void should_turn_on_disco_lights_when_game_starts() {
         LightningMock lightningMock = new LightningMock();
 
-        LocalDateTime fridayFiveOClock = LocalDateTime.of(2015, 11, 13, 17, 00);
+        LocalDateTime fridayFiveOClock = new LocalDateTime(2015, 11, 13, 17, 00);
         AdjustableClock adjustableClock = new AdjustableClock();
         adjustableClock.setClock(fridayFiveOClock);
 
@@ -53,7 +51,7 @@ public class GameTest {
     public void should_turn_on_disco_lights_when_starting_game_on_friday_23_59() {
         LightningMock lightningMock = new LightningMock();
 
-        LocalDateTime fridayFiveOClock = LocalDateTime.of(2015, 11, 13, 23, 59);
+        LocalDateTime fridayFiveOClock = new LocalDateTime(2015, 11, 13, 23, 59);
         AdjustableClock adjustableClock = new AdjustableClock();
         adjustableClock.setClock(fridayFiveOClock);
 
@@ -69,7 +67,7 @@ public class GameTest {
     public void should_turn_on_regular_lights_when_starting_game_on_saturday_00_00() {
         LightningMock lightningMock = new LightningMock();
 
-        LocalDateTime fridayFiveOClock = LocalDateTime.of(2015, 11, 14, 00, 00);
+        LocalDateTime fridayFiveOClock = new LocalDateTime(2015, 11, 14, 00, 00);
         AdjustableClock adjustableClock = new AdjustableClock();
         adjustableClock.setClock(fridayFiveOClock);
 
@@ -85,7 +83,7 @@ public class GameTest {
     public void should_turn_on_regular_lights_when_starting_game_on_friday_16_59() {
         LightningMock lightningMock = new LightningMock();
 
-        LocalDateTime fridayFiveOClock = LocalDateTime.of(2015, 11, 13, 16, 59);
+        LocalDateTime fridayFiveOClock = new LocalDateTime(2015, 11, 13, 16, 59);
         AdjustableClock adjustableClock = new AdjustableClock();
         adjustableClock.setClock(fridayFiveOClock);
         Game game = createGameWithPlayers();

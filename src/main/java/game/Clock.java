@@ -1,6 +1,6 @@
 package game;
 
-import java.time.LocalDateTime;
+import org.joda.time.LocalDateTime;
 
 /**
  * Tilbyr testbarhet

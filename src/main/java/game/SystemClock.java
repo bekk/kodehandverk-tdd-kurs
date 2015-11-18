@@ -1,6 +1,6 @@
 package game;
 
-import java.time.LocalDateTime;
+import org.joda.time.LocalDateTime;
 
 /**
  * Her har vi laget en enkel wrapper. Dette ser kanskje litt unødvendig ut, men
