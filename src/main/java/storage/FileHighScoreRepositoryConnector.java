@@ -25,12 +25,13 @@ public final class FileHighScoreRepositoryConnector {
      *
      * Det den gjør er å lese opp en fil med en antatt JSON-struktur som følgende:
      *
-     * [
-     *  {name: "Player 1", score: 300},
-     *  {name: "Player 2", score: 290},
-     *  {name: "Player 3", score: 250}
-     * ]
-     *
+     * {
+     * scores: [
+     *     {name: "Player 1", score: 300},
+     *     {name: "Player 2", score: 290},
+     *     {name: "Player 3", score: 250}
+     *    ]
+     * }
      * @throws IOException
      * @throws ParseException
      */
